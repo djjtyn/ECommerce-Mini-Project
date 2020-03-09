@@ -10,6 +10,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Load Static CSS-->
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -27,6 +28,14 @@
             <li><a href="{% url 'login' %}">Login</a></li>
             <li><a href="{% url 'registration' %}">Register</a></li>
             {% endif %}
+            <li>
+              <a href="{% url 'view_cart' %}">
+                <i class="fa fa-shopping-cart"></i>Cart
+                {% if product_count > 0 %}
+                <label class="badge badge-warning">{{ product_count }}</label>
+                {% endif %}
+              </a>
+            </li>
         </ul>
     </nav>
 
@@ -37,7 +46,16 @@
     <div>
         {% for message in messages %} {{ message }} {% endfor %}
     </div>
-    {% endif %} {% block content %}{% endblock %}
+    {% endif %} 
+    <div class="container">
+      <div class="display">
+        <form action="{% url 'search' %}" method="get">
+          <input type="text" name="q">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    {% block content %}{% endblock %}
+    </div>
 </body>
 
 </html>
