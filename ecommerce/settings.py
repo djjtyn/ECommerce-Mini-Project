@@ -32,6 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     os.environ.get('C9_HOSTNAME'),
     '8000-bef9cbef-1e9e-49d7-a41b-e393af16f9ce.ws-eu01.gitpod.io',
+    'david-ecommerce.herokuapp.com',
 ]
 
 
