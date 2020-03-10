@@ -1,1 +1,4 @@
  *.sqlite
+ __pycache__
+ .~*
+ env.py

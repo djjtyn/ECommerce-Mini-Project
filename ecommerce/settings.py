@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from os import path
+if path.exists("env.py"):
+    import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8)g4k3^e^4pv64-#+e!6lyp^lif3c6#@bm8%y-+hx4*)5^fi+^'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +48,8 @@ INSTALLED_APPS = [
     'home',
     'products',
     'cart',
-    'search'
+    'search',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -140,5 +144,8 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_PUBLISHABLE = os.environ.get('STRIPE_PUBLISHABLE')
+STRIPE_SECRET = os.environ.get('STRIPE_SECRET')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
